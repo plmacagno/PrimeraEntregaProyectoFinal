@@ -21,10 +21,12 @@ const addProduct = (req, res) => {
 //Actualizo Producto
 const updateProduct = (req, res) => {
 	const id = Number(req.params.id);
-	if (id < 0 || id > products.objects.length) return res.status(400).send({ message: 'Ingresa el ID de un producto listado' });
-	if (isNaN(id)) return res.status(400).send({ message: 'Ingresa el ID de un producto listado' });
-	products.update(id, req.body);
-	res.json({ message: 'Producto actualizado' });
+	if (products.getProducto(id)){
+        products.update(id, req.body);
+        return res.json({ message: 'Producto actualizado' });
+    }
+    return res.json({ message: 'Producto no existe' });
+
 }
 
 //Borro Producto

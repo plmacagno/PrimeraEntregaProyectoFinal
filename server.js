@@ -1,6 +1,9 @@
 import express from "express";
 import routerProducts from './routes/routerProducts.js';
 import routerCarts from './routes/routerCart.js';
+// ** Dejo con // todo lo referente a autenticación debido a que me da error,
+// ** anda pero me tira un error **
+// import { auth } from "./middlewares/auth.js"; 
 
 const app = express();
 
@@ -8,8 +11,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/products', routerProducts);
+// app.use('/api/products', [auth],routerProducts);
+// app.use('/api/cart', [auth],routerCarts);
+app.use('/api/products',routerProducts);
 app.use('/api/cart', routerCarts);
+
 app.use('*', (req, res) => {
 	const path = req.params;
 	const method = req.method;

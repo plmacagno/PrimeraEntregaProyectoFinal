@@ -1,14 +1,15 @@
 import Container from "./container.js";
 
-let admin;
+
 const carts = new Container('./data/carts.json');
 
 //Agrego Carrito
 const addCart = (req, res) => {
 	const products = req.body;
+	const id=carts.save([]);
 	if (!products) return carts.save([]);
 	carts.save(products);
-	res.json({ message: 'Carrito agregado' });
+	res.json({ message: 'Carrito agregado',carrito:id });
 }
 
 //Borro Carrito
